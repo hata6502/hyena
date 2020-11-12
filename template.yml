@@ -1,6 +1,7 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform:
   - AWS::Serverless-2016-10-31
+
 Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
@@ -15,6 +16,7 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
+
   Hyena:
     Type: AWS::Serverless::Function
     Properties:
@@ -36,4 +38,7 @@ Resources:
           Properties:
             Schedule: cron(0/20 13-4 * * ? *)
       MemorySize: 128
-      Timeout: 300
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonRekognitionReadOnlyAccess
+      Timeout: 30
