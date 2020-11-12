@@ -5,6 +5,7 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
+      TableName: Hyena
       AttributeDefinitions:
         - AttributeName: id
           AttributeType: S
@@ -21,6 +22,8 @@ Resources:
       Handler: dist/index.handler
       Environment:
         Variables:
+          DYNAMODB_ENDPOINT: DYNAMODB_ENDPOINT
+          DYNAMODB_TABLE_NAME: Hyena
           LABELS: LABELS
           SEARCH_QUERY: SEARCH_QUERY
           TWITTER_ACCESS_TOKEN_KEY: TWITTER_ACCESS_TOKEN_KEY
@@ -33,4 +36,4 @@ Resources:
           Properties:
             Schedule: cron(0/20 13-4 * * ? *)
       MemorySize: 128
-      Timeout: 30
+      Timeout: 300
